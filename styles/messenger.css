@@ -49,7 +49,6 @@
 #contact a{
     font-weight: 500;
     color: var(--black);
-
 }
 
 #mes_bar{
@@ -219,7 +218,7 @@ textarea::-webkit-input-placeholder {
 }
 
 #span_textarea a{
-    color:rgb(56, 123, 248) !important;
+    color:var(--lightning_color) !important;
 }
 
 @media (max-width:960px){
@@ -260,5 +259,24 @@ textarea::-webkit-input-placeholder {
 
     #span_textarea::-webkit-scrollbar{
         width: 0px;
+    }
+
+    #mes_header{
+        display: flex;
+        overflow: hidden;
+    }
+
+    #contact{
+        display: none;
+    }
+
+    #mes_bar::before{
+        content: "Александр";
+        display: block;
+        position: fixed;
+        font-weight: 500;
+        left: 0;
+        transform: translateX(calc(50vw - 40px)) translateY(17px);
+        color: var(--black);
     }
 }

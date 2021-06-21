@@ -13,8 +13,8 @@ function lightning(inputing, key){
   //13 - энтер, 8 - бекспейс, 46 - delete, 32 - пробел
   var text=inputing.innerHTML;
   //console.log(text);
-  if (key!=8 && key!=46)
-  {
+ /* if (key!=8 && key!=46)
+  {*/
     text=text.replace(/(\w+@\w+\.\w+)/mg, '<a>$1</a>'); //alex@alex.ru
     text=text.replace(/(( |\&nbsp\;|^)@\w+)/mg, '<a>$1</a>'); //@alex_318
     text=text.replace(/(( |\&nbsp\;|^)#\S[^\&]+)/mg, '<a>$1</a>'); //#хэштег
@@ -22,12 +22,17 @@ function lightning(inputing, key){
 
     text=text.replace("<a><a>", "<a>");
     text=text.replace("</a>;</a>;", "</a>;");
-  } else {
+  /*} else {*/
     text=text.replace(/<a>([^#@\/:]+)<\/a>/mg, '$1');
-  }
+  //}
   console.log(text);
   inputing.innerHTML=text;
 
+  cursor_focus(inputing);
+}
+
+//Фокусировка на поле ввода
+function cursor_focus(inputing){
   var range = document.createRange();
   range.selectNodeContents(inputing);
   range.collapse(false);
@@ -50,12 +55,17 @@ var listener = function (event) {
     var audio = document.querySelector('#audio');
     audio.style.animation=send_selector.animation_to;
     send_selector.active="send";
-  }
   
-  if(event) {
-    let key=event.keyCode;
-    if (key == 13 || key == 8 || key == 46 || key == 32){
-      lightning(inputing, key);
+    if(event) {
+      try{
+        let key=event.keyCode;
+        console.log(key);
+        if (key == 13 || key == 8 || key == 46 || key == 32){
+          lightning(inputing, key);
+        }
+      } catch {
+        if (inputing.textContent[len-1]==" ") lightning(inputing, 0);
+      }
     }
   }
 
@@ -116,53 +126,6 @@ function send_message(){
     document.querySelector('#span_textarea').innerHTML="";
   }
 }
-
-//Печать эмодзи и сохранение в историю
-function add_emoji(i,j){
-  if (document.querySelector('#save_emoji').style.display=="block"){
-    return;
-  }
-
-  var cur_emoji=emoji[i].items[j];
-  document.querySelector('#span_textarea').textContent+=cur_emoji;
-  listener();
-
-  var save_group=document.querySelector('#save_emoji_group');
-  var save_emojies=save_group.querySelectorAll('a');
-
-  save_emojies.forEach(function(item){
-    if (item.textContent===cur_emoji) item.remove();
-  })
-
-  if (save_emojies.length==25) save_emojies[24].remove();
-
-  var emoji_box=document.querySelector('#save_one_emoji').content.cloneNode(true);
-  var link=emoji_box.querySelector("a");
-  link.textContent=cur_emoji;
-  var attr="add_emoji("+i+","+j+");";
-  link.setAttribute("onclick", attr);
-
-  save_group.insertAdjacentElement("afterBegin",link);
-}
-
-//Загрузка эмозди
-async function load_emoji(){
-  emoji.forEach(function(item, i){
-    var temp = document.querySelector('#sticker_template');
-    var theme = temp.content.cloneNode(true);
-    theme.querySelector("span").textContent=item.title;
-    document.querySelector('#emoji_list').appendChild(theme);
-    
-    item.items.forEach(function(one_emoji, j){
-      var emoji_box=document.querySelector('#one_emoji').content.cloneNode(true);
-      var link=emoji_box.querySelector("a");
-      link.textContent=one_emoji;
-      var attr="add_emoji("+i+","+j+");";
-      link.setAttribute("onclick", attr);
-      document.querySelectorAll('#emoji_group')[i].appendChild(link);
-    });
-  });
-};
 
 //Переключение на историю
 function to_history(){
@@ -247,9 +210,12 @@ window.onload = async function() {
   open_emoji();
 
   //Обработчики событий
+  var form=document.querySelector('#span_textarea');
+  if (get_width()>breakpoint) cursor_focus(form);
+
   window.addEventListener("resize", responsible, false);
-  window.addEventListener("keyup", listener, false);
-  window.addEventListener("kedown", listener, false);
+  form.addEventListener("keyup", listener, false);
+  form.addEventListener("kedown", listener, false);
 
   //Доп проверка при перзагрузке
   responsible();

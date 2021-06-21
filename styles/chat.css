@@ -57,7 +57,7 @@
 }
 
 #message_container p a{
-    color:rgba(255, 255, 255, 0.479) !important;
+    color:var(--lightning_color) !important;
 }
 
 .perfect_emoji{

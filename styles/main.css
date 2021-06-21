@@ -25,6 +25,7 @@
     --second_grey: rgb(129, 140, 153);
     --hover_filter:brightness(0.6);
     --form_width:450px;
+    --lightning_color: rgb(56, 123, 248);
 }
 
 @font-face { 
