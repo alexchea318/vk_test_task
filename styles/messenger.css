@@ -263,7 +263,6 @@ textarea::-webkit-input-placeholder {
 
     #mes_header{
         display: flex;
-        overflow: hidden;
     }
 
     #contact{

@@ -87,7 +87,6 @@ function emoji_button_resizer(){
 //Добавление сообщения в чат
 function add_message(message){
   var inputing = document.querySelector("#span_textarea");
-  cursor_focus(inputing);
 
   var temp = document.querySelector('#mes_template');
   var new_mes = temp.content.querySelector(".message");
@@ -124,15 +123,16 @@ function get_time(){
 
 //Функция отправки сообщения
 function send_message(){
+  var inputing = document.querySelector('#span_textarea');
   if (send_selector.active=="audio"){
     return;
   } else {
-    var inputing = document.querySelector('#span_textarea');
     lightning(inputing);
     var texts = inputing.innerHTML;
     add_message({time: get_time(), text: texts});
     document.querySelector('#span_textarea').innerHTML="";
   }
+  cursor_focus(inputing);
 }
 
 //Переключение на историю
