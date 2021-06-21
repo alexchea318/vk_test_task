@@ -132,6 +132,7 @@ function send_message(){
     add_message({time: get_time(), text: texts});
     document.querySelector('#span_textarea').innerHTML="";
   }
+  listener();
   cursor_focus(inputing);
 }
 
