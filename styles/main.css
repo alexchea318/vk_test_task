@@ -41,6 +41,7 @@ a{
 
 html{
     overflow: hidden;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 body{
@@ -94,8 +95,8 @@ main{
     :root, #messenger, body, #content, html, main{
         margin: 0px!important;
         padding:0px!important;
-        width: 100vw!important;
-        height: 100vh!important;
+        width: 100%!important;
+        height: 100%!important;
     }
 
 }

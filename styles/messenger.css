@@ -272,11 +272,10 @@ textarea::-webkit-input-placeholder {
 
     #mes_bar::before{
         content: "Александр";
-        display: block;
-        position: fixed;
+        display: flex;
+        position: -webkit-sticky;
         font-weight: 500;
-        left: 0;
-        transform: translateX(calc(50vw - 40px)) translateY(17px);
+        margin:auto;
         color: var(--black);
     }
 }
