@@ -64,6 +64,22 @@
     font-size: 40px;
 }
 
+#chat::-webkit-scrollbar {
+    width: 5px;
+    background-color: #fff;
+}
+  
+#chat::-webkit-scrollbar-thumb {
+    background: #DAE2EA;
+    border-radius: 5px;
+}
+  
+#chat::-webkit-scrollbar-track {
+    box-shadow: none;
+    background-color: #fff;
+    border-radius: 5px
+}
+
 @media (max-width:960px){
     #chat_avatar{
         display: none;

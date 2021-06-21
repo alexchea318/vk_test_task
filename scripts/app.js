@@ -86,6 +86,9 @@ function emoji_button_resizer(){
 
 //Добавление сообщения в чат
 function add_message(message){
+  var inputing = document.querySelector("#span_textarea");
+  cursor_focus(inputing);
+
   var temp = document.querySelector('#mes_template');
   var new_mes = temp.content.querySelector(".message");
   var new_mes_content = document.importNode(new_mes, true);
@@ -93,15 +96,18 @@ function add_message(message){
 
   message.text=message.text.replace(/\&nbsp\;/gi, "");
   new_mes_content.querySelector("p").innerHTML = message.text;
+
   document.querySelector('#all_messages').appendChild(new_mes_content);
 
-  var texts = document.querySelector("#span_textarea").textContent;
-  console.log(texts.length);
+  var texts = inputing.textContent;
   if (texts.length===2){
     if ( /\p{Extended_Pictographic}/u.test(texts) ){
       new_mes_content.querySelector("p").classList.add("perfect_emoji");
     }
   }
+
+  var chat = document.querySelector('#chat');
+  chat.scrollTop = chat.scrollHeight;
 }
 
 //Часы и минуты для сообщений
@@ -121,8 +127,10 @@ function send_message(){
   if (send_selector.active=="audio"){
     return;
   } else {
-    var inputing = document.querySelector('#span_textarea').innerHTML;
-    add_message({time: get_time(), text:inputing});
+    var inputing = document.querySelector('#span_textarea');
+    lightning(inputing);
+    var texts = inputing.innerHTML;
+    add_message({time: get_time(), text: texts});
     document.querySelector('#span_textarea').innerHTML="";
   }
 }

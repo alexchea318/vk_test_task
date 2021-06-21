@@ -75,3 +75,7 @@
     color:rgb(147, 147, 147);
     font-size: 12px;
 }
+
+.last_menu li a:hover{
+    text-decoration: underline;
+}
