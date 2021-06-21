@@ -1,0 +1,100 @@
+:root{
+    --main_width: 990px;
+    font-family:-apple-system,BlinkMacSystemFont,'Roboto','Helvetica Neue',Geneva,
+    "Noto Sans Armenian","Noto Sans Bengali","Noto Sans Cherokee","Noto Sans Devanagari",
+    "Noto Sans Ethiopic","Noto Sans Georgian","Noto Sans Hebrew","Noto Sans Kannada",
+    "Noto Sans Khmer","Noto Sans Lao","Noto Sans Osmanya","Noto Sans Tamil","Noto Sans Telugu",
+    "Noto Sans Thai",sans-serif,arial,Tahoma,verdana;
+    font-size: 13px;
+    font-weight: 400;
+    --font_temp:-apple-system,BlinkMacSystemFont,'Roboto','Helvetica Neue',Geneva,
+    "Noto Sans Armenian","Noto Sans Bengali","Noto Sans Cherokee","Noto Sans Devanagari",
+    "Noto Sans Ethiopic","Noto Sans Georgian","Noto Sans Hebrew","Noto Sans Kannada",
+    "Noto Sans Khmer","Noto Sans Lao","Noto Sans Osmanya","Noto Sans Tamil","Noto Sans Telugu",
+    "Noto Sans Thai",sans-serif,arial,Tahoma,verdana;
+    font-size: 13px;
+    --link_color: rgb(42, 88, 133);
+    --hover_color:#f5f6f8;
+    --icon_color: rgb(81, 129, 184);
+    --main_gap:15px;
+    --accent:#5181b8;
+    --black:rgb(0,0,0);
+    --line_color:#dce1e6;
+    --three_grids: 1fr 3.7fr 1.3fr;
+    --header_height: 48px;
+    --second_grey: rgb(129, 140, 153);
+    --hover_filter:brightness(0.6);
+    --form_width:450px;
+}
+
+@font-face { 
+    font-family: "SF Pro Text";                                 
+    src: url(/fonts/AppleColorEmoji.ttf) format('ttf');           
+    font-weight: normal; 
+    font-style: normal; 
+  }
+
+a{
+    text-decoration: none;
+}
+
+html{
+    overflow: hidden;
+}
+
+body{
+    margin: auto;
+    background-color: #edeef0;
+}
+
+main{
+    width: var(--main_width);
+    margin: var(--main_gap) auto;
+}
+
+#content{
+    display: flex;
+    margin: auto;
+    padding: 0px 10px;
+}
+
+.page_layout{
+    display:grid;
+    grid-template-columns: var(--three_grids);
+    column-gap: var(--main_gap);
+}
+
+#messenger, .widget{
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.widget{
+    height: fit-content;
+    padding: 5px 0px;
+}
+
+@media (max-width:960px){
+    body{
+        margin: 0px;
+        padding: 0px;
+    }
+
+    header, sidebar, .widget{
+        display: none;
+        width: 0px!important;
+        height:0px;
+    }
+
+    .page_layout, #content, main{
+        display: block;
+    }
+
+    :root, #messenger, body, #content, html, main{
+        margin: 0px!important;
+        padding:0px!important;
+        width: 100vw!important;
+        height: 100vh!important;
+    }
+
+}
