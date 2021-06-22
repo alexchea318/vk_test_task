@@ -10,21 +10,20 @@ function get_width(){return document.documentElement.clientWidth}
 
 //Подсветка с помощью регулярных выражений
 function lightning(inputing, key){
-  var text=inputing.innerHTML;
-  alert(key);
-  console.log(key);
-  //( |\&nbsp\;|^)
-  if (key != 'Backspace' && key != 'delete') {
-    text=text.replace(/(\w+@\w+\.\w+)/mg, '<a>$1</a>&nbsp;'); //alex@alex.ru
-    text=text.replace(/(@\w+)/mg, '<a>$1</a>&nbsp;'); //@alex_318
-    text=text.replace(/(#\S[^\&<]+)/mg, '<a>$1</a>&nbsp;'); //#хэштег
-    text=text.replace(/((http|https):\/\/\S+\.\S+[^\&<])/mg, '<a>$1</a>&nbsp;'); //ссылка
+  if (/img/mg.test(inputing.innerHTML)) {
+    console.log("picture"); 
+    return;
   }
+  var text=inputing.textContent;
+ 
+  let re=/(\w+)<a>(@\w+)<\/a>(\.\w+)/mg;
+  text=text.replace(/(@\w+)/mg, '<a>$1</a>'); //@alex_318
+  text=text.replace(re, '<a>$1$2$3</a>'); //alex@alex.ru
+  text=text.replace(/(( |\&nbsp\;|^)#\S+)/mg, '<a>$1</a>'); //#хэштег
+  text=text.replace(/((http|https):\/\/\S+\.\S+)/mg, '<a>$1</a>'); //ссылка
 
-  text=text.replace("&nbsp;&nbsp;", "&nbsp;");
-  text=text.replace("<a><a>", "<a>");
-  text=text.replace("</a>&nbsp;</a>&nbsp;", "</a>&nbsp;");
-  text=text.replace(/<a>([^#@\/:]+)<\/a>/mg, '$1');
+  //for errors
+  //text=text.replace(/<a>([^#@\/:]+)<\/a>/mg, '$1');
 
   console.log(text);
   inputing.innerHTML=text;
@@ -45,7 +44,6 @@ function cursor_focus(inputing){
 //Включение или отключение опции отправки
 var listener = function (key) {
   var inputing = document.querySelector('#span_textarea');
-  //inputing.innerHTML=inputing.innerHTML.replace(/\&nbsp\;/gi, '_');
   var len=inputing.innerHTML.length;
 
   if (len<1){
@@ -56,13 +54,9 @@ var listener = function (key) {
     var audio = document.querySelector('#audio');
     audio.style.animation=send_selector.animation_to;
     send_selector.active="send";
-  
-    if(key) {
-      if (key == ' ' || key == 'Enter' || key=="Tab"
-      || key == 'Backspace' || key == 'Delete'){
-        lightning(inputing, key);
-      }
-    }
+    
+    //Вызов подстветки
+    if  (key != 'ArrowLeft' && key != 'ArrowRight') lightning(inputing, key);
   }
 
   emoji_button_resizer();
@@ -142,6 +136,7 @@ function responsible(event){
     mes_bar.style.display='grid';
     mes_bar.className="";
   }
+
   emoji_button_resizer();
 }
 
@@ -151,14 +146,10 @@ window.onload = async function() {
   add_message({time: get_time(), text: str});
   open_emoji();
 
-  //Обработчики событий
   var form=document.querySelector('#span_textarea');
   if (get_width()>breakpoint) cursor_focus(form);
 
   window.addEventListener("resize", responsible, false);
-  //form.addEventListener("keyup", listener, false);
-  //form.addEventListener("kedown", listener, false);
-  form.oninput = listener;
 
   //Доп проверка при перзагрузке
   responsible();

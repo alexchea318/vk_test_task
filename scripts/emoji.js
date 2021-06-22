@@ -94,25 +94,28 @@ function set_state(emojies, opener){
 
 //Открытие и закрытие emoji
 async function open_emoji(){
-  if (get_width()<=breakpoint) return;
 
   var opener  = document.querySelector('#emoji');
   var emojies = document.querySelector('#emoji_select');
   
   opener.onmouseover = function() {
+    if (get_width()<=breakpoint) return;
     to_list();
     emojies.style.display='block';
   }
   
   opener.onmouseout = function() {
+    if (get_width()<=breakpoint) return;
     set_state(emojies, opener);
   }
 
   emojies.onmouseover = function() {
+    if (get_width()<=breakpoint) return;
     emojies.style.display='block';
   } 
 
   emojies.onmouseout =  function() {
+    if (get_width()<=breakpoint) return;
     set_state(emojies, opener);
   }
 }
