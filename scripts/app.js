@@ -9,32 +9,34 @@ const breakpoint=960;
 function get_width(){return document.documentElement.clientWidth}
 
 //Подсветка с помощью регулярных выражений
-function lightning(inputing, key){
-  if (/img/mg.test(inputing.innerHTML)) {
-    console.log("picture"); 
+function lightning(key){
+  var inputting = document.querySelector('#span_textarea');
+  if (/<img src/mg.test(inputting.innerHTML)) {
+    //console.log("picture"); 
     return;
   }
-  var text=inputing.textContent;
+
+  var inputting = document.querySelector('#span_textarea');
+  var text=inputting.textContent;
  
-  let re=/(\w+)<a>(@\w+)<\/a>(\.\w+)/mg;
-  text=text.replace(/(@\w+)/mg, '<a>$1</a>'); //@alex_318
-  text=text.replace(re, '<a>$1$2$3</a>'); //alex@alex.ru
+  text=text.replace(/(( |\&nbsp\;|^)@\w+)/mg, '<a>$1</a>'); //@alex_318 - упоминаия
+  text=text.replace(/(\w+)<a>(@\w+)<\/a>(\.\w+)/mg, '<a>$1$2$3</a>'); //alex@alex.ru - почты
   text=text.replace(/(( |\&nbsp\;|^)#\S+)/mg, '<a>$1</a>'); //#хэштег
   text=text.replace(/((http|https):\/\/\S+\.\S+)/mg, '<a>$1</a>'); //ссылка
 
-  //for errors
+  //Errors correct
   //text=text.replace(/<a>([^#@\/:]+)<\/a>/mg, '$1');
 
-  console.log(text);
-  inputing.innerHTML=text;
+  //console.log(text);
+  inputting.innerHTML=text;
 
-  cursor_focus(inputing);
+  cursor_focus(inputting);
 }
 
 //Фокусировка на поле ввода
-function cursor_focus(inputing){
+function cursor_focus(inputting){
   var range = document.createRange();
-  range.selectNodeContents(inputing);
+  range.selectNodeContents(inputting);
   range.collapse(false);
   var sel = window.getSelection();
   sel.removeAllRanges();
@@ -43,8 +45,8 @@ function cursor_focus(inputing){
 
 //Включение или отключение опции отправки
 var listener = function (key) {
-  var inputing = document.querySelector('#span_textarea');
-  var len=inputing.innerHTML.length;
+  var inputting = document.querySelector('#span_textarea');
+  var len=inputting.innerHTML.length;
 
   if (len<1){
     var audio = document.querySelector('#audio');
@@ -54,9 +56,10 @@ var listener = function (key) {
     var audio = document.querySelector('#audio');
     audio.style.animation=send_selector.animation_to;
     send_selector.active="send";
-    
-    //Вызов подстветки
-    if  (key != 'ArrowLeft' && key != 'ArrowRight') lightning(inputing, key);
+  }
+
+  if  (key != 'ArrowLeft' && key != 'ArrowRight' && key != 'emoji') {
+    lightning(key);
   }
 
   emoji_button_resizer();
@@ -64,7 +67,7 @@ var listener = function (key) {
 
 //Добавление сообщения в чат
 function add_message(message){
-  var inputing = document.querySelector("#span_textarea");
+  var inputting = document.querySelector("#span_textarea");
 
   var temp = document.querySelector('#mes_template');
   var new_mes = temp.content.querySelector(".message");
@@ -76,13 +79,15 @@ function add_message(message){
 
   document.querySelector('#all_messages').appendChild(new_mes_content);
 
-  var texts = inputing.textContent;
+  //Увеличение только 1 эмодзи
+  var texts = inputting.textContent;
   if (texts.length===2){
     if ( /\p{Extended_Pictographic}/u.test(texts) ){
       new_mes_content.querySelector("p").classList.add("perfect_emoji");
     }
   }
 
+  //Прокрутка вниз
   var chat = document.querySelector('#chat');
   chat.scrollTop = chat.scrollHeight;
 }
@@ -101,17 +106,17 @@ function get_time(){
 
 //Функция отправки сообщения
 function send_message(){
-  var inputing = document.querySelector('#span_textarea');
+  var inputting = document.querySelector('#span_textarea');
   if (send_selector.active=="audio"){
     return;
   } else {
-    lightning(inputing);
-    var texts = inputing.innerHTML;
+    lightning(inputting);
+    var texts = inputting.innerHTML;
     add_message({time: get_time(), text: texts});
     document.querySelector('#span_textarea').innerHTML="";
   }
   listener();
-  cursor_focus(inputing);
+  cursor_focus(inputting);
 }
 
 //Измение ширины textarea
@@ -125,16 +130,6 @@ function responsible(event){
     document.documentElement.style.setProperty('--form_width', "450px");
     var n_avatar=document.querySelector("#mes_avatar");
     document.querySelector("#mes_menu").insertAdjacentElement("afterEnd",n_avatar);
-  }
-
-  var mes_bar=document.querySelector("#mes_header");
-  if (width<311) mes_bar.style.display='none';
-  else if (width<=breakpoint) {
-    mes_bar.className="flex_mes_head";
-    mes_bar.style.display='flex';
-  }  else  {
-    mes_bar.style.display='grid';
-    mes_bar.className="";
   }
 
   emoji_button_resizer();

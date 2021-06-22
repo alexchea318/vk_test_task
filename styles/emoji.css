@@ -138,8 +138,9 @@
     }
 
     #emoji_group, #save_emoji_group{
-        font-size: 20px;
+        font-size: 22px;
         grid-template-columns: repeat(6, 1fr)!important;
+        row-gap: 2vw;
     }
 
     #emoji_select::after{

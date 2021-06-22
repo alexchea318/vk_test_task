@@ -42,11 +42,11 @@ const emoji=[
 function add_emoji(i,j){
   var cur_emoji=emoji[i].items[j];
   document.querySelector('#span_textarea').textContent+=cur_emoji;
-  listener();
+  if (get_width()>breakpoint) cursor_focus(document.querySelector('#span_textarea'));
+  
+  listener('emoji');
 
-  if (document.querySelector('#save_emoji').style.display=="block"){
-    return;
-  }
+  if (document.querySelector('#save_emoji').style.display=="block") return;
 
   var save_group=document.querySelector('#save_emoji_group');
   var save_emojies=save_group.querySelectorAll('a');
@@ -152,10 +152,10 @@ function to_list(){
 
 //Удерживаниекнопки включения эмодзи на месте
 function emoji_button_resizer(){
-  var inputing = document.querySelector('#span_textarea');
+  var inputting = document.querySelector('#span_textarea');
   var button= document.querySelector("#emoji");
   if (get_width()<=breakpoint){
-    if (inputing.clientHeight>40) button.style.transform="scale(1.25) translatey(-11px)";
+    if (inputting.clientHeight>40) button.style.transform="scale(1.25) translatey(-11px)";
     else button.style.transform="scale(1.25) translatey(-7px)";
   } else {
     button.style.transform="none";
