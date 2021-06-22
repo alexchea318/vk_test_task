@@ -29,7 +29,7 @@ function lightning(key){
   //text=text.replace(/<a>([^#@\/:]+)<\/a>/mg, '$1');
 
   if (key=='Enter') return;
-  console.log(text);
+  //console.log(text);
   inputting.innerHTML=text;
 
   cursor_focus(inputting);

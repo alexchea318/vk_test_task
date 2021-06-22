@@ -41,7 +41,7 @@ const emoji=[
 //Печать эмодзи и сохранение в историю
 function add_emoji(i,j){
   var cur_emoji=emoji[i].items[j];
-  document.querySelector('#span_textarea').textContent+=cur_emoji;
+  document.querySelector('#span_textarea').innerHTML+=cur_emoji;
   if (get_width()>breakpoint) cursor_focus(document.querySelector('#span_textarea'));
   
   listener('emoji');
