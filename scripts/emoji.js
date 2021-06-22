@@ -92,7 +92,7 @@ function set_state(emojies, opener){
   }
 }
 
-//Открытие и закрытие emoji
+//Открытие и закрытие emoji в браузере при hover
 async function open_emoji(){
 
   var opener  = document.querySelector('#emoji');

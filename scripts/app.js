@@ -1,10 +1,11 @@
 //Переключение режима аудио и отправки
-var send_selector= {
+const send_selector= {
   active: "audio",
   animation_to: "send_change 0.2s ease-in-out forwards",
   animation_back: "send_change 0.2s ease-in-out reverse"
 };
 
+//Констатнты для ширины окна
 const breakpoint=960;
 function get_width(){return document.documentElement.clientWidth}
 
@@ -27,6 +28,7 @@ function lightning(key){
   //Errors correct
   //text=text.replace(/<a>([^#@\/:]+)<\/a>/mg, '$1');
 
+  if (key=='Enter') return;
   //console.log(text);
   inputting.innerHTML=text;
 
@@ -115,6 +117,7 @@ function send_message(){
     add_message({time: get_time(), text: texts});
     document.querySelector('#span_textarea').innerHTML="";
   }
+
   listener();
 
   //Закрываем эмодзи на мобильных после отправкки сообщения
@@ -155,5 +158,6 @@ window.onload = async function() {
   //Доп проверка при перзагрузке
   responsible();
   emoji_button_resizer();
+  
   await load_emoji();
 };
