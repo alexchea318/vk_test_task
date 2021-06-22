@@ -158,6 +158,6 @@ window.onload = async function() {
   //Доп проверка при перзагрузке
   responsible();
   emoji_button_resizer();
-  
+
   await load_emoji();
 };
