@@ -20,16 +20,16 @@ function lightning(key){
   var inputting = document.querySelector('#span_textarea');
   var text=inputting.textContent;
  
-  text=text.replace(/(( |\&nbsp\;|^)@\w+)/mg, '<a>$1</a>'); //@alex_318 - упоминаия
+  text=text.replace(/(@\w+)/mg, '<a>$1</a>'); //@alex_318 - упоминаия
   text=text.replace(/(\w+)<a>(@\w+)<\/a>(\.\w+)/mg, '<a>$1$2$3</a>'); //alex@alex.ru - почты
-  text=text.replace(/(( |\&nbsp\;|^)#\S+)/mg, '<a>$1</a>'); //#хэштег
+  text=text.replace(/(#\S+)/mg, '<a>$1</a>'); //#хэштег
   text=text.replace(/((http|https):\/\/\S+\.\S+)/mg, '<a>$1</a>'); //ссылка
 
   //Errors correct
   //text=text.replace(/<a>([^#@\/:]+)<\/a>/mg, '$1');
 
   if (key=='Enter') return;
-  //console.log(text);
+  console.log(text);
   inputting.innerHTML=text;
 
   cursor_focus(inputting);
