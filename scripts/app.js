@@ -11,6 +11,7 @@ function get_width(){return document.documentElement.clientWidth}
 //Подсветка с помощью регулярных выражений
 function lightning(inputing, key){
   var text=inputing.innerHTML;
+  alert(key);
   console.log(key);
   //( |\&nbsp\;|^)
   if (key != 'Backspace' && key != 'delete') {
