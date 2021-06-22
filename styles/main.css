@@ -28,13 +28,6 @@
     --lightning_color: rgb(56, 123, 248);
 }
 
-@font-face { 
-    font-family: "SF Pro Text";                                 
-    src: url(/fonts/AppleColorEmoji.ttf) format('ttf');           
-    font-weight: normal; 
-    font-style: normal; 
-  }
-
 a{
     text-decoration: none;
 }
