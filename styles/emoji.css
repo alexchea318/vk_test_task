@@ -160,7 +160,7 @@
 
     #group_name{
         color: rgb(147, 147, 147);
-        padding:10px 0px 8px 0px;
+        padding:13px 0px 8px 0px;
         display: block;
         text-transform:uppercase;
         font-size: 12px;
@@ -176,6 +176,11 @@
     #emoji_tools a img{
         width: 100%;
         height:100%;
+    }
+
+    #emoji_list, #save_emoji{
+        margin-top:-7px;
+        margin-bottom: 7px;
     }
 
 }
