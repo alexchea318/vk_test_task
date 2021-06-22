@@ -10,21 +10,21 @@ function get_width(){return document.documentElement.clientWidth}
 
 //Подсветка с помощью регулярных выражений
 function lightning(inputing, key){
-  //13 - энтер, 8 - бекспейс, 46 - delete, 32 - пробел
   var text=inputing.innerHTML;
-  //console.log(text);
- /* if (key!=8 && key!=46)
-  {*/
-    text=text.replace(/(\w+@\w+\.\w+)/mg, '<a>$1</a>'); //alex@alex.ru
-    text=text.replace(/(( |\&nbsp\;|^)@\w+)/mg, '<a>$1</a>'); //@alex_318
-    text=text.replace(/(( |\&nbsp\;|^)#\S[^\&]+)/mg, '<a>$1</a>'); //#хэштег
-    text=text.replace(/((http|https):\/\/\S+\.\S+)/mg, '<a>$1</a>'); //ссылка
+  console.log(key);
+  //( |\&nbsp\;|^)
+  if (key != 'Backspace' && key != 'delete') {
+    text=text.replace(/(\w+@\w+\.\w+)/mg, '<a>$1</a>&nbsp;'); //alex@alex.ru
+    text=text.replace(/(@\w+)/mg, '<a>$1</a>&nbsp;'); //@alex_318
+    text=text.replace(/(#\S[^\&<]+)/mg, '<a>$1</a>&nbsp;'); //#хэштег
+    text=text.replace(/((http|https):\/\/\S+\.\S+[^\&<])/mg, '<a>$1</a>&nbsp;'); //ссылка
+  }
 
-    text=text.replace("<a><a>", "<a>");
-    text=text.replace("</a>;</a>;", "</a>;");
-  /*} else {*/
-    text=text.replace(/<a>([^#@\/:]+)<\/a>/mg, '$1');
-  //}
+  text=text.replace("&nbsp;&nbsp;", "&nbsp;");
+  text=text.replace("<a><a>", "<a>");
+  text=text.replace("</a>&nbsp;</a>&nbsp;", "</a>&nbsp;");
+  text=text.replace(/<a>([^#@\/:]+)<\/a>/mg, '$1');
+
   console.log(text);
   inputing.innerHTML=text;
 
@@ -42,10 +42,10 @@ function cursor_focus(inputing){
 }
 
 //Включение или отключение опции отправки
-var listener = function (event) {
+var listener = function (key) {
   var inputing = document.querySelector('#span_textarea');
   //inputing.innerHTML=inputing.innerHTML.replace(/\&nbsp\;/gi, '_');
-  var len=inputing.textContent.length;
+  var len=inputing.innerHTML.length;
 
   if (len<1){
     var audio = document.querySelector('#audio');
@@ -56,32 +56,15 @@ var listener = function (event) {
     audio.style.animation=send_selector.animation_to;
     send_selector.active="send";
   
-    if(event) {
-      try{
-        let key=event.keyCode;
-        console.log(key);
-        if (key == 13 || key == 8 || key == 46 || key == 32){
-          lightning(inputing, key);
-        }
-      } catch {
-        if (inputing.textContent[len-1]==" ") lightning(inputing, 0);
+    if(key) {
+      if (key == ' ' || key == 'Enter' || key=="Tab"
+      || key == 'Backspace' || key == 'Delete'){
+        lightning(inputing, key);
       }
     }
   }
 
   emoji_button_resizer();
-}
-
-//Удерживаниекнопки включения эмодзи на месте
-function emoji_button_resizer(){
-  var inputing = document.querySelector('#span_textarea');
-  var button= document.querySelector("#emoji");
-  if (get_width()<=breakpoint){
-    if (inputing.clientHeight>40) button.style.transform="scale(1.25) translatey(-11px)";
-    else button.style.transform="scale(1.25) translatey(-7px)";
-  } else {
-    button.style.transform="none";
-  }
 }
 
 //Добавление сообщения в чат
@@ -136,78 +119,27 @@ function send_message(){
   cursor_focus(inputing);
 }
 
-//Переключение на историю
-function to_history(){
-  document.querySelector('#emoji_list').style.display="none";
-  document.querySelector('#save_emoji').style.display="block";
-  document.querySelector('#history_emoji').className="active_tool";
-  document.querySelector('#all_emoji').className="not_active_tool";
-}
-
-//Переключение на список
-function to_list(){
-  document.querySelector('#emoji_list').style.display="block";
-  document.querySelector('#save_emoji').style.display="none";
-  document.querySelector('#history_emoji').className="not_active_tool";
-  document.querySelector('#all_emoji').className="active_tool";
-}
-
-//Ассинхронная установка состояния
-function set_state(emojies, opener){
-  if (!emojies.querySelector(':hover') && !opener.querySelector(':hover')){
-    emojies.style.display='none';
-  }
-}
-
-//Открытие и закрытие emoji
-async function open_emoji(){
-  if (get_width()<=breakpoint) return;
-
-  var opener  = document.querySelector('#emoji');
-  var emojies = document.querySelector('#emoji_select');
-  
-  opener.onmouseover = function() {
-    to_list();
-    emojies.style.display='block';
-  }
-  
-  opener.onmouseout = function() {
-    set_state(emojies, opener);
-  }
-
-  emojies.onmouseover = function() {
-    emojies.style.display='block';
-  } 
-
-  emojies.onmouseout =  function() {
-    set_state(emojies, opener);
-  }
-}
-
-//Открытие и закрытие emoji на oneclick
-function mobile_open_emoji(){
-  if  (get_width()>breakpoint) return;
-  var opener  = document.querySelector('#emoji');
-  var emojies = document.querySelector('#emoji_select');
-
-  if (emojies.style.display=='block'){
-    emojies.style.display='none';
-  } else {
-    to_list();
-    emojies.style.display='block';
-  }
-}
-
 //Измение ширины textarea
 function responsible(event){
   var width=get_width();
   if (width<=breakpoint){
-    if (width>655)  width=width-90+"px"
-    else width=width-90+"px";
-
-    document.documentElement.style.setProperty('--form_width', width);
+    document.documentElement.style.setProperty('--form_width', width-90+"px");
+    var avatar=document.querySelector("#mes_avatar");
+    document.querySelector("#back").insertAdjacentElement("afterEnd",avatar);
   } else{
     document.documentElement.style.setProperty('--form_width', "450px");
+    var n_avatar=document.querySelector("#mes_avatar");
+    document.querySelector("#mes_menu").insertAdjacentElement("afterEnd",n_avatar);
+  }
+
+  var mes_bar=document.querySelector("#mes_header");
+  if (width<311) mes_bar.style.display='none';
+  else if (width<=breakpoint) {
+    mes_bar.className="flex_mes_head";
+    mes_bar.style.display='flex';
+  }  else  {
+    mes_bar.style.display='grid';
+    mes_bar.className="";
   }
   emoji_button_resizer();
 }
@@ -223,8 +155,9 @@ window.onload = async function() {
   if (get_width()>breakpoint) cursor_focus(form);
 
   window.addEventListener("resize", responsible, false);
-  form.addEventListener("keyup", listener, false);
-  form.addEventListener("kedown", listener, false);
+  //form.addEventListener("keyup", listener, false);
+  //form.addEventListener("kedown", listener, false);
+  form.oninput = listener;
 
   //Доп проверка при перзагрузке
   responsible();

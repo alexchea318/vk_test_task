@@ -152,4 +152,8 @@
         transform: scale(1.25) translatey(-7px);
         display: block;
     }
+
+    #all_emoji, #history_emoji{   
+        padding: 3px 15px;
+    }
 }

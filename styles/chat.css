@@ -112,7 +112,8 @@
 
     #chat{
         padding:0px;
-        margin:0px 12px -2px 50px;
+        margin:0px 0px -2px 50px;
+        padding-right: 12px;
     }
 }
 

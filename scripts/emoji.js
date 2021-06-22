@@ -43,7 +43,7 @@ function add_emoji(i,j){
   var cur_emoji=emoji[i].items[j];
   document.querySelector('#span_textarea').textContent+=cur_emoji;
   listener();
-  
+
   if (document.querySelector('#save_emoji').style.display=="block"){
     return;
   }
@@ -84,4 +84,77 @@ async function load_emoji(){
     });
   });
 };
+
+//Установка состояния
+function set_state(emojies, opener){
+  if (!emojies.querySelector(':hover') && !opener.querySelector(':hover')){
+    emojies.style.display='none';
+  }
+}
+
+//Открытие и закрытие emoji
+async function open_emoji(){
+  if (get_width()<=breakpoint) return;
+
+  var opener  = document.querySelector('#emoji');
+  var emojies = document.querySelector('#emoji_select');
   
+  opener.onmouseover = function() {
+    to_list();
+    emojies.style.display='block';
+  }
+  
+  opener.onmouseout = function() {
+    set_state(emojies, opener);
+  }
+
+  emojies.onmouseover = function() {
+    emojies.style.display='block';
+  } 
+
+  emojies.onmouseout =  function() {
+    set_state(emojies, opener);
+  }
+}
+
+//Открытие и закрытие emoji на oneclick
+function mobile_open_emoji(){
+  if  (get_width()>breakpoint) return;
+  var opener  = document.querySelector('#emoji');
+  var emojies = document.querySelector('#emoji_select');
+
+  if (emojies.style.display=='block'){
+    emojies.style.display='none';
+  } else {
+    to_list();
+    emojies.style.display='block';
+  }
+}
+
+//Переключение на историю
+function to_history(){
+  document.querySelector('#emoji_list').style.display="none";
+  document.querySelector('#save_emoji').style.display="block";
+  document.querySelector('#history_emoji').className="active_tool";
+  document.querySelector('#all_emoji').className="not_active_tool";
+}
+
+//Переключение на список
+function to_list(){
+  document.querySelector('#emoji_list').style.display="block";
+  document.querySelector('#save_emoji').style.display="none";
+  document.querySelector('#history_emoji').className="not_active_tool";
+  document.querySelector('#all_emoji').className="active_tool";
+}
+
+//Удерживаниекнопки включения эмодзи на месте
+function emoji_button_resizer(){
+  var inputing = document.querySelector('#span_textarea');
+  var button= document.querySelector("#emoji");
+  if (get_width()<=breakpoint){
+    if (inputing.clientHeight>40) button.style.transform="scale(1.25) translatey(-11px)";
+    else button.style.transform="scale(1.25) translatey(-7px)";
+  } else {
+    button.style.transform="none";
+  }
+}

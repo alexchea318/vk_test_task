@@ -51,6 +51,12 @@
     color: var(--black);
 }
 
+#contact a::after{
+    content:"Александр Чеченев";
+    font-weight: 500;
+    color: var(--black);
+}
+
 #mes_bar{
     display: flex;
     flex-direction:row;
@@ -266,15 +272,25 @@ textarea::-webkit-input-placeholder {
     }
 
     #contact{
-        display: none;
+        align-items: flex-start;
     }
 
-    #mes_bar::before{
-        content: "Александр";
-        display: flex;
-        position: -webkit-sticky;
+    #mes_menu{
+        margin:0px;
+    }   
+
+    #status{
+        margin-top:0px
+    }
+
+    #contact a::after{
+        content:"Александр";
         font-weight: 500;
-        margin:auto;
         color: var(--black);
+    }
+
+    .flex_mes_head #mes_avatar{
+        margin-left: 10px;
+        margin-right: 5px;
     }
 }
