@@ -240,7 +240,7 @@ textarea::-webkit-input-placeholder {
     }
 
     #span_textarea{
-        padding: 10 0px;
+        padding: 11px 0px 9px 0px;
         width:calc(var(--form_width) - 30px);
     }
 
