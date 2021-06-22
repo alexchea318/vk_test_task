@@ -32,7 +32,7 @@
 
 #emoji_group, #save_emoji_group{
     display: grid;
-    grid-template-columns: repeat(10, 1fr);;
+    grid-template-columns: repeat(10, 1fr);
     column-gap: 0px;
     font-size: 15px;
     line-height: 19px;
@@ -46,7 +46,7 @@
 
 #emoji_group a:hover,#save_emoji_group a:hover{
     border-radius: 5px;
-    background-color:rgba(163, 163, 163, 0.171)
+    background-color:rgba(163, 163, 163, 0.171);
 }
 
 #emoji_group a, #save_emoji_group a{
@@ -154,7 +154,28 @@
         display: block;
     }
 
-    #all_emoji, #history_emoji{   
-        padding: 3px 15px;
+    #emoji_group a:hover,#save_emoji_group a:hover{
+        background-color:transparent;
     }
+
+    #group_name{
+        color: rgb(147, 147, 147);
+        padding:10px 0px 8px 0px;
+        display: block;
+        text-transform:uppercase;
+        font-size: 12px;
+        font-weight:500;
+        letter-spacing:0.8px;
+    }
+
+    #emoji_tools a{
+        width: 40px;
+        padding: 6px;
+    }
+
+    #emoji_tools a img{
+        width: 100%;
+        height:100%;
+    }
+
 }

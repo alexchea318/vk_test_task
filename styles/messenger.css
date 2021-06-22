@@ -299,6 +299,10 @@ textarea::-webkit-input-placeholder {
     #mes_header{
         display: flex;
     }
+
+    #mes_footer{
+        z-index: 5;
+    }
 }
 
 @media (max-width:280px){
