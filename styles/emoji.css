@@ -140,7 +140,7 @@
     #emoji_group, #save_emoji_group{
         font-size: 22px;
         grid-template-columns: repeat(6, 1fr)!important;
-        row-gap: 2vw;
+        row-gap: 15px;
     }
 
     #emoji_select::after{
@@ -173,6 +173,10 @@
         padding: 6px;
     }
 
+    #emoji_tools{
+        margin-top: auto;
+    }
+
     #emoji_tools a img{
         width: 100%;
         height:100%;
@@ -180,7 +184,10 @@
 
     #emoji_list, #save_emoji{
         margin-top:-7px;
-        margin-bottom: 7px;
+    }
+
+    #emoji_select{
+        height: 275px;
     }
 
 }
