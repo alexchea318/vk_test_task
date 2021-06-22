@@ -72,8 +72,9 @@ async function load_emoji(){
     var temp = document.querySelector('#sticker_template');
     var theme = temp.content.cloneNode(true);
     theme.querySelector("span").textContent=item.title;
+    if (i==0) {theme.querySelector("span").classList.add("first_in_list");}
     document.querySelector('#emoji_list').appendChild(theme);
-    
+
     item.items.forEach(function(one_emoji, j){
       var emoji_box=document.querySelector('#one_emoji').content.cloneNode(true);
       var link=emoji_box.querySelector("a");

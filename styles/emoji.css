@@ -185,12 +185,8 @@
         height:100%;
     }
 
-    #emoji_list, #save_emoji{
-        margin-top:-7px;
-    }
-
-    #emoji_select{
-        height: 275px;
+    .first_in_list{
+        padding-top: 5px !important;
     }
 
 }
