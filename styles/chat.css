@@ -6,6 +6,7 @@
     max-height: calc(100vh - 2*48px - 2*var(--main_gap) - 62px);
     flex-grow: 3;
     overflow-y: auto;
+    scrollbar-width: thin;
 }
 
 #all_messages{
@@ -92,6 +93,7 @@
         margin-left:auto;
         border-radius:20px;
         padding: 10px 15px;
+        width: -moz-fit-content;
     }
 
     #message_container{

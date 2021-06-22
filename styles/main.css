@@ -66,6 +66,7 @@ main{
 
 .widget{
     height: fit-content;
+    height: -moz-fit-content;
     padding: 5px 0px;
 }
 
