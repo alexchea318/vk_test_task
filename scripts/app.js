@@ -116,6 +116,12 @@ function send_message(){
     document.querySelector('#span_textarea').innerHTML="";
   }
   listener();
+
+  //Закрываем эмодзи на мобильных после отправкки сообщения
+  if (document.querySelector('#emoji_select').style.display=='block'){
+    if (get_width()<=breakpoint) mobile_open_emoji();
+  }
+
   cursor_focus(inputting);
 }
 
