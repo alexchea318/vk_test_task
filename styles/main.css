@@ -28,6 +28,22 @@
     --lightning_color: rgb(56, 123, 248);
 }
 
+@font-face {
+    font-family: 'Roboto';
+    src: url(fonts/Roboto-Regular.ttf);
+    font-weight: 400;
+    font-style: normal;
+    display: swap;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url(fonts/Roboto-Medium.ttf);
+    font-weight: 500;
+    font-style: normal;
+    display: swap;
+}
+
 a{
     text-decoration: none;
 }
