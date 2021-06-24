@@ -1,18 +1,10 @@
 :root{
     --main_width: 990px;
-    font-family:-apple-system,BlinkMacSystemFont,'Roboto','Helvetica Neue',Geneva,
-    "Noto Sans Armenian","Noto Sans Bengali","Noto Sans Cherokee","Noto Sans Devanagari",
-    "Noto Sans Ethiopic","Noto Sans Georgian","Noto Sans Hebrew","Noto Sans Kannada",
-    "Noto Sans Khmer","Noto Sans Lao","Noto Sans Osmanya","Noto Sans Tamil","Noto Sans Telugu",
-    "Noto Sans Thai",sans-serif,arial,Tahoma,verdana;
-    font-size: 13px;
-    font-weight: 400;
     --font_temp:-apple-system,BlinkMacSystemFont,'Roboto','Helvetica Neue',Geneva,
     "Noto Sans Armenian","Noto Sans Bengali","Noto Sans Cherokee","Noto Sans Devanagari",
     "Noto Sans Ethiopic","Noto Sans Georgian","Noto Sans Hebrew","Noto Sans Kannada",
     "Noto Sans Khmer","Noto Sans Lao","Noto Sans Osmanya","Noto Sans Tamil","Noto Sans Telugu",
     "Noto Sans Thai",sans-serif,arial,Tahoma,verdana;
-    font-size: 13px;
     --link_color: rgb(42, 88, 133);
     --hover_color:#f5f6f8;
     --icon_color: rgb(81, 129, 184);
@@ -26,6 +18,10 @@
     --hover_filter:brightness(0.6);
     --form_width:450px;
     --lightning_color: rgb(56, 123, 248);
+
+    font-family: var(--font_temp);
+    font-size: 13px;
+    font-weight: 400;
 }
 
 @font-face {

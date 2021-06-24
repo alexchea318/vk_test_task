@@ -306,7 +306,7 @@ textarea::-webkit-input-placeholder {
 }
 
 @media (max-width:280px){
-    #mes_header{
+    #contact{
         display: none;
     }
 }

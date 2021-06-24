@@ -1,8 +1,8 @@
 :root{
-    --bottom_emoji:72px;
-    --left_emoji:calc(50% - 86px);
+    --bottom_emoji: 72px;
+    --left_emoji: calc(50% - 86px);
     --emoji_width: 290px;
-    --bottom_icon:35px;
+    --bottom_icon: 35px;
 }
 
 #emoji{

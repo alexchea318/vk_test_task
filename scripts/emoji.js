@@ -63,7 +63,7 @@ function add_emoji(i,j){
   var attr="add_emoji("+i+","+j+");";
   link.setAttribute("onclick", attr);
 
-  save_group.insertAdjacentElement("afterBegin",link);
+  save_group.insertAdjacentElement("afterBegin", link);
 }
 
 //Загрузка эмозди
@@ -154,7 +154,7 @@ function to_list(){
 //Удерживаниекнопки включения эмодзи на месте
 function emoji_button_resizer(){
   var inputting = document.querySelector('#span_textarea');
-  var button= document.querySelector("#emoji");
+  var button = document.querySelector("#emoji");
   if (get_width()<=breakpoint){
     if (inputting.clientHeight>40) button.style.transform="scale(1.25) translatey(-11px)";
     else button.style.transform="scale(1.25) translatey(-7px)";

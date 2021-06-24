@@ -134,11 +134,11 @@ function responsible(event){
   if (width<=breakpoint){
     document.documentElement.style.setProperty('--form_width', width-90+"px");
     var avatar=document.querySelector("#mes_avatar");
-    document.querySelector("#back").insertAdjacentElement("afterEnd",avatar);
+    document.querySelector("#back").insertAdjacentElement("afterEnd", avatar);
   } else{
     document.documentElement.style.setProperty('--form_width', "450px");
     var n_avatar=document.querySelector("#mes_avatar");
-    document.querySelector("#mes_menu").insertAdjacentElement("afterEnd",n_avatar);
+    document.querySelector("#mes_menu").insertAdjacentElement("afterEnd", n_avatar);
   }
 
   emoji_button_resizer();
